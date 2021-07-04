@@ -265,13 +265,13 @@ button:active {
     box-shadow: 0 0 2rem rgba(0, 0, 0, 0.5);
     border-radius: 3px;
 }
-.part2 .una {
+.part2 .f_card {
     background: url(images/screenshot1.svg) no-repeat;
 }
-.part2 .dos {
+.part2 .s_card {
     background: url(images/screenshot2.jpg) no-repeat;
 }
-.part2 .tres {
+.part2 .t_card {
     background: url(images/screenshot3.jpg) no-repeat;
 }
 .part2 input {
@@ -893,14 +893,18 @@ footer textarea:not(:placeholder-shown) + label {
     top: 145px;
 }
 
-#uno:checked ~ .una label:first-child:before,
-#dole:checked ~ .dos label:nth-child(3):before,
-#tele:checked ~ .tres label:nth-child(2):before {
+/*Слайдер*/
+/*Заливка индикатора (кругляшки внизу карточек)*/
+#c1:checked ~ .f_card label:first-child:before,
+#c3:checked ~ .s_card label:nth-child(3):before,
+#c2:checked ~ .t_card label:nth-child(2):before {
 	background: white;
 }
-#uno:checked ~ .una label:first-child:after, #dole:checked ~ .dos label:nth-child(3):after,
-#tele:checked ~ .tres label:nth-child(2):after{
-  content: "";
+/*Линия, показывающая переход к следующему слайду у кругляшек*/
+#c1:checked ~ .f_card label:first-child:after,
+#c3:checked ~ .s_card label:nth-child(3):after,
+#c2:checked ~ .t_card label:nth-child(2):after{
+    content: "";
     position: absolute;
     width: 32px;
     height: 2px;
@@ -908,46 +912,44 @@ footer textarea:not(:placeholder-shown) + label {
     margin-left: 0px;
     margin-top: 3px;
 }
-#uno:checked ~ .dos,
-#dole:checked ~ .tres,
-#tele:checked ~ .una {
-  animation: 1s ye;
-  animation-fill-mode: forwards;
-  transform-origin: center right;
-  z-index: 1;
+/*Анимация смены слайда*/
+/*Для индикатора - сохраняет стили нужного слайда и применяет их на этот индикатор*/
+#c1:checked ~ .s_card,
+#c3:checked ~ .t_card,
+#c2:checked ~ .f_card {
+    animation: 1.5s ye;
+    animation-fill-mode: forwards;
+    transform-origin: center right;
+    z-index: 1;
 }
-#uno:checked ~ .tres,
-#dole:checked ~ .una,
-#tele:checked ~ .dos {
-  animation: 1.5s fuera-dch;
-  animation-fill-mode: forwards;
-  transform-origin: center right;
-  z-index: 2;
+#c1:checked ~ .t_card,
+#c3:checked ~ .f_card,
+#c2:checked ~ .s_card {
+    animation: 1.5s fuera-dch;
+    animation-fill-mode: forwards;
+    transform-origin: center right;
+    z-index: 2;
 }
-#uno:checked ~ .una,
-#dole:checked ~ .dos,
-#tele:checked ~ .tres {
-  animation: 2s central;
-  animation-fill-mode: forwards;
-  transform-origin: center center;
-  z-index:3;
+#c1:checked ~ .f_card,
+#c3:checked ~ .s_card,
+#c2:checked ~ .t_card {
+    animation: 1.5s central;
+    animation-fill-mode: forwards;
+    transform-origin: center center;
+    z-index:3;
 }
-
+/*В keyframes'ах задаем свойства анимации слайдов соответсвенно прогрессу их выполнения*/
 @keyframes ye {
-    0% {transform: scale(1) translatex(0%);} 
-    70% {transform: scale(.9) translatex(-100%);}
+    0% {transform: scale(.5) translatex(0%);} 
+    70% {transform: scale(.9) translatex(-105%);}
     100% {transform: scale(.8) translatex(14%);}
-  }
-  @keyframes fuera-dch {
-    0% {transform: scale(1) translatex(0%);}
-    70% {transform: scale(.9) translatex(100%);}
+}
+@keyframes fuera-dch {
+    0% {transform: scale(.5) translatex(0%);}
+    70% {transform: scale(.9) translatex(105%);}
     100% {transform: scale(.9) translatex(7%);}
-  }
-  @keyframes central {
-    0% {transform: scale(.8);z-index: 1;}
-    80% {transform: scale(.5);z-index: 3;}
+}
+@keyframes central {
+    0% {transform: scale(.5);z-index: 1;}
     100% {transform: scale(1);z-index: 3;}
-  }
-  @keyframes pulso {
-    50% {opacity: .7;}
-  }
+}
